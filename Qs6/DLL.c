@@ -13,6 +13,20 @@ struct info
 	struct node NodeData;
 };
 
+void destroy(struct info* head)
+{
+	struct info* temp_head = head;
+	struct info* temp_next;
+	while(temp_head->NodeData.next != NULL)
+	{
+		temp_head = temp_head->NodeData.next;
+		temp_next = temp_head->NodeData.prev;
+		temp_next -> NodeData.next = NULL;
+		free(temp_head);
+		 temp_head = temp_next;
+	}
+	head = NULL;
+}
 struct info * Insert_at_end(struct info * head, int data_to_add)
 {
     struct info * modInfo = (struct info *)malloc(sizeof(struct info));
